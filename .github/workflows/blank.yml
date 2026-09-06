@@ -14,8 +14,7 @@ jobs:
         with:
           channel: stable
 
-      - run: - run: flutter create . --project-name calculadora_factor_ipsc --platforms=android
-
+      - run: flutter create . --project-name calculadora_factor_ipsc --platforms=android
       - run: flutter pub get
 
       - run: flutter build apk --release
