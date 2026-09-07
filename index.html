@@ -1,0 +1,58 @@
+
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculadora Factor IPSC</title>
+<link rel="manifest" href="manifest.json">
+<style>
+body{font-family:Arial;background:#111;color:#fff;max-width:420px;margin:auto;padding:20px}
+input,button{width:100%;padding:12px;margin:8px 0;font-size:18px;border-radius:8px}
+button{background:#2563eb;color:white;border:none}
+.box{background:#222;padding:15px;border-radius:10px;margin-top:15px}
+</style>
+</head>
+<body>
+
+<h1>Calculadora Factor IPSC</h1>
+
+<label>Pes de la bala (grains)</label>
+<input id="grains" type="number" value="124">
+
+<label>Velocitat (m/s)</label>
+<input id="ms" type="number" value="300">
+
+<label>Factor objectiu</label>
+<input id="target" type="number" value="125">
+
+<button onclick="calcular()">Calcular</button>
+
+<div class="box" id="resultat"></div>
+
+<script>
+function calcular(){
+  let g=Number(document.getElementById("grains").value);
+  let ms=Number(document.getElementById("ms").value);
+  let t=Number(document.getElementById("target").value);
+
+  let fps=ms*3.28084;
+  let factor=g*fps/1000;
+  let minfps=t*1000/g;
+  let minms=minfps/3.28084;
+
+  document.getElementById("resultat").innerHTML=
+  "<b>Factor:</b> "+factor.toFixed(1)+
+  "<br><b>Velocitat mínima:</b> "+minms.toFixed(1)+" m/s"+
+  "<br>"+minfps.toFixed(0)+" ft/s";
+}
+
+calcular();
+
+if("serviceWorker" in navigator){
+ navigator.serviceWorker.register("sw.js");
+}
+</script>
+
+</body>
+</html>
